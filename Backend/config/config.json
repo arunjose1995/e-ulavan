@@ -1,6 +1,5 @@
 {
-    "PORT":3000,
-    "URL":"mongodb://localhost/User_info",
-    "JWTSECREATEKEY":"reshma_rohith"
-    
+  "PORT": 3000,
+  "URL": "mongodb://localhost/E_ulavan",
+  "JWTSECREATEKEY": "reshma_rohith"
 }
