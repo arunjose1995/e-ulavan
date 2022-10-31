@@ -5,20 +5,24 @@ const config = require('../../config/config.json');
 const bcrypt = require('bcrypt');
 // const express=require('express')
 const postdetails = async (req, res) => {
-  console.log(req.body);
-  let user = await User.findOne({ email: req.body.email });
-  if (user) return res.status(400).send('user already register');
-  user = new User({
+ const userDetails = {
     name: req.body.name,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
-  });
-    // res.send(user);
-  const token = jwt.sign({ _id: user._id }, config.JWTSECREATEKEY);
+  };
+  console.log(req.body);
+  let user = await User.findOne({ email: req.body.email });
+  console.log(user);
+  if (user) {
+    return res.status(400).send('user already register');
+  }
+  const result = await User.create(userDetails);
+  console.log(result);
+  const token = jwt.sign({  user }, config.JWTSECREATEKEY);
   req.header;
-  console.log(req.header);
+
   // res.header('x-auth-token',token).send(result)
-  res.send({user:user, token: token });
+  res.send({user:result,token:token});
 };
 const login = async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
