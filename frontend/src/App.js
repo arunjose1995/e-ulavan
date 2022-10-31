@@ -1,9 +1,11 @@
 import './App.css';
-import Routering from './Router';
 
+import Routering from './Router';
 function App() {
   return (
-   <Routering/>
+    <>
+      <Routering />
+    </>
   );
 }
 

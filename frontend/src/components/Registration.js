@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "/home/bhararathram/e-ulavan/frontend/src/components/Registration.css";
+import "./Registration.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
