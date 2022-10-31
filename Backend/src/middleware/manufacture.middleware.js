@@ -3,10 +3,10 @@ const joi = require("joi");
 const User = async (req, res, next) => {
   try {
     const cards = joi.object({
-            name: req.body.name,
-            phonenumber: req.body.phonenumber,
-            address: req.body.address,
-            bio:req.body.bio
+      name: req.body.name,
+      phonenumber: req.body.phonenumber,
+      address: req.body.address,
+      bio: req.body.bio
     });
     await cards.validateAsync(req.body);
     next();
