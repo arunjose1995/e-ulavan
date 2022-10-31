@@ -15,6 +15,7 @@ import {
   TextField, Typography
  
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -40,6 +41,8 @@ const Registration = () => {
   const [showform, setshowform] = useState(false);
   const [showlogin,setshowlogin] = useState(false);
 
+ const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -52,6 +55,7 @@ const Registration = () => {
     onSubmit: (values) => {
       if (values.password === values.confirmpassword) {
         alert(JSON.stringify(values, null, 2));
+        navigate("/Home")
         console.log(values);
       } else {
         setconfirmpassword(true);
@@ -67,6 +71,7 @@ const Registration = () => {
 const showloginfrom =() =>{
   
   setshowlogin(true)
+
   
 }
 
