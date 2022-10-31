@@ -1,24 +1,31 @@
-const jwt = require('jsonwebtoken');
 const express = require('express');
-const cors = require('cors');
 const registrationController = require('../controll/register.controller');
 const buyerdetails = require('../controll/buyerdetails.controller');
 const manufacturedetails = require('../controll/manufacturedetails.controller');
 const middleware = require('../middleware/registration.middleware');
 
-const app = express.Router();
-app.use(cors({
-    origin: '*'
-}));
+const router = express.Router();
 
-app.post('/post', middleware.User,registrationController.postdetails);
-app.post('/buyer',registrationController.postdetails);
-app.post('/manufacture',registrationController.postdetails);
-app.get('/api/details', registrationController.getAlldetails);
-app.get('/api/details/:id', registrationController.getdetails);
-app.put('/api/details/data', registrationController.updateAlldetails);
-app.put('/api/details/data/:id', registrationController.updatedetails);
-app.delete('/api/details/data/:id', registrationController.removeAlldetails);
-app.delete('/api/details/data', registrationController.removedetails);
 
-module.exports = app;
+//registration
+router.post('/post', middleware.User, registrationController.postdetails);
+router.get('/api/details', registrationController.getAlldetails);
+router.get('/api/details/:id', registrationController.getdetails);
+router.put('/api/details/data', registrationController.updateAlldetails);
+router.put('/api/details/data/:id', registrationController.updatedetails);
+router.delete('/api/details/data/:id', registrationController.removeAlldetails);
+router.delete('/api/details/data', registrationController.removedetails);
+
+//buyer
+router.post('/buyer/post',buyerdetails.postdetails);
+
+//manufacture
+router.post('/manufacture/post', manufacturedetails.postdetails);
+router.get('/api/details', manufacturedetails.getAlldetails);
+router.get('/api/details/:id', manufacturedetails.getdetails);
+router.put('/api/details/data', manufacturedetails.updateAlldetails);
+router.put('/api/details/data/:id', manufacturedetails.updatedetails);
+router.delete('/api/details/data/:id', manufacturedetails.removeAlldetails);
+router.delete('/api/details/data', manufacturedetails.removedetails);
+
+module.exports = router;
