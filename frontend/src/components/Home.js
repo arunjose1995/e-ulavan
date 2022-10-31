@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,7 +14,11 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import HomeIcon from "@mui/icons-material/Home";
 import { useState } from "react";
 import { ListItem, ListItemText, ListItemAvatar } from "@mui/material";
-import HomeCard from './HomeCard'
+import HomeCard from './HomeCard';
+
+
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -59,6 +64,7 @@ const Home = () => {
           </Toolbar>
         </AppBar>
         <Toolbar />
+
         <HomeCard />
       </ThemeProvider>
     </>
