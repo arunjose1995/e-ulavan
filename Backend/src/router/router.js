@@ -3,7 +3,7 @@ const express = require('express');
 const controller = require('../controll/controller');
 const middleware = require('../middleware/middleware');
 
-const app = express.Router();+
+const app = express.Router();
 app.post('/post', controller.postdetails);
 // app.post('/login', middleware, controller.login);
 app.get('/api/details', controller.getAlldetails);
