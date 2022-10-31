@@ -1,21 +1,24 @@
 const User = require('../model/manufacturedetails.model');
 const config = require('../../config/config.json');
 const postdetails = async (req, res) => {
+  const manufacturedetails = {
+    name: req.body.name,
+    mobilenumber: req.body.mobilenumber,
+    address: req.body.address,
+    bio: req.body.bio
+  };
   console.log(req.body);
   let user = await User.findOne({ mobilenumber: req.body.mobilenumber });
-  if (user) return res.status(400).send('user already register');
-    user = {
-        name: req.body.name,
-        mobilenumber: req.body.mobilenumber,
-        address: req.body.address,
-        bio: req.body.bio
-    }
-    const result = await user.save();
-    console.log(result);
-    res.send(result)
-  };
-    
+  console.log("fcrfc",user);
+  if (user) {
+   return  res.status(400).send('manufacture already register');
+  }
+  const result = await User.create(manufacturedetails);
+  res.send({ result })
 
+
+}
+  
 const getAlldetails =async(req,res) => {
     const data = await User.find()
     console.log( data);
@@ -33,9 +36,9 @@ const getAlldetails =async(req,res) => {
       const result = await User.updateMany({
           $set:{
             name: req.body.name,
-            mobilenumber: req.body.mobilenumber,
-            address: req.body.address,
-            bio:req.body.bio
+            email: req.body.email,
+            password: req.body.password,
+            conformpassword: req.body.conformpassword
           }
       });
       console.log(result);
@@ -47,9 +50,9 @@ const getAlldetails =async(req,res) => {
           {
           $set:{
             name: req.body.name,
-            mobilenumber: req.body.mobilenumber,
-            address: req.body.address,
-            bio:req.body.bio
+            email: req.body.email,
+            password: req.body.password,
+            conformpassword: req.body.conformpassword
           }
       });
       console.log(result);
@@ -67,13 +70,13 @@ const getAlldetails =async(req,res) => {
       console.log(result);
       res.send(result)
   }
-   module.exports={
-      postdetails,
-      getAlldetails,
-      getdetails,
-      updateAlldetails,
-      updatedetails,
-      removedetails,
-      removeAlldetails
-     }
+  module.exports = {
+    postdetails,
+    getAlldetails,
+    getdetails,
+    updateAlldetails,
+    updatedetails,
+    removedetails,
+    removeAlldetails
+  };
    
