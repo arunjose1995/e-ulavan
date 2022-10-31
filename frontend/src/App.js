@@ -1,10 +1,9 @@
 import './App.css';
+import Routering from './Router';
 
 function App() {
   return (
-    <div>
-    <h1>hello e-ulavan</h1> 
-    </div>
+   <Routering/>
   );
 }
 
