@@ -15,23 +15,19 @@ const postdetails = async (req, res) => {
     
         })
         res.send(buyer)
-    } 
-catch (error) {
+    }
+    catch (error) {
         res.send(error);
         console.log(error);
         
 
+    }
+
 }
 
 
-const login = async (req, res) => {
-    let user = await buyer.findOne({ email: req.body.email });
-    console.log(user);
-    if (!user) return res.status(400).send('password incorrect');
-
-  };
-}
 module.exports = {
     postdetails,
+    
     
 }

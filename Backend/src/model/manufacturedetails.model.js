@@ -3,17 +3,15 @@ const manufacture_Details = new mongoose.Schema({
     name: {
         type: String,
     },
-    email: {
-        type: String,
-    },
-    phonenumber: {
+    mobilenumber: {
         type: Number,
     },
-    aadhaarnumber: {
-       type: Number,
-    },
+    
     address: {
         type: String,
-    }
+    },
+    bio: {
+        type: String,
+    },
 })
 module.exports = mongoose.model('manufacturedetails', manufacture_Details);

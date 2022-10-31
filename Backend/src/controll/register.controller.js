@@ -20,7 +20,13 @@ const postdetails = async (req, res) => {
   // res.header('x-auth-token',token).send(result)
   res.send({user:user, token: token });
 };
+const login = async (req, res) => {
+  let user = await User.findOne({ email: req.body.email });
+  console.log(user);
+  if (!user) return res.status(400).send('password incorrect');
+  res.status(200).send('user registered');
 
+};
 const getAlldetails =async(req,res) => {
     const data = await User.find()
     console.log( data);
@@ -74,7 +80,8 @@ const getAlldetails =async(req,res) => {
   }
    module.exports={
        postdetails,
-       getAlldetails,
+      getAlldetails,
+      login,
       getdetails,
       updateAlldetails,
       updatedetails,

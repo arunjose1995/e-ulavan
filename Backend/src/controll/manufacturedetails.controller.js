@@ -1,24 +1,20 @@
-const User = require('../model/manufacture.model');
-const jwt = require('jsonwebtoken');
+const User = require('../model/manufacturedetails.model');
 const config = require('../../config/config.json');
-const bcrypt = require('bcrypt');
-// const express=require('express')
 const postdetails = async (req, res) => {
   console.log(req.body);
-  let user = await User.findOne({ email: req.body.email });
+  let user = await User.findOne({ mobilenumber: req.body.mobilenumber });
   if (user) return res.status(400).send('user already register');
-  user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
-  });
-    // res.send(user);
-  const token = jwt.sign({ _id: user._id }, config.JWTSECREATEKEY);
-  req.header;
-  console.log(req.header);
-  // res.header('x-auth-token',token).send(result)
-  res.send({user:user, token: token });
-};
+    user = {
+        name: req.body.name,
+        mobilenumber: req.body.mobilenumber,
+        address: req.body.address,
+        bio: req.body.bio
+    }
+    const result = await user.save();
+    console.log(result);
+    res.send(result)
+  };
+    
 
 const getAlldetails =async(req,res) => {
     const data = await User.find()
@@ -37,9 +33,9 @@ const getAlldetails =async(req,res) => {
       const result = await User.updateMany({
           $set:{
             name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            conformpassword: req.body.conformpassword
+            mobilenumber: req.body.mobilenumber,
+            address: req.body.address,
+            bio:req.body.bio
           }
       });
       console.log(result);
@@ -51,9 +47,9 @@ const getAlldetails =async(req,res) => {
           {
           $set:{
             name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            conformpassword: req.body.conformpassword
+            mobilenumber: req.body.mobilenumber,
+            address: req.body.address,
+            bio:req.body.bio
           }
       });
       console.log(result);
@@ -72,8 +68,8 @@ const getAlldetails =async(req,res) => {
       res.send(result)
   }
    module.exports={
-       postdetails,
-       getAlldetails,
+      postdetails,
+      getAlldetails,
       getdetails,
       updateAlldetails,
       updatedetails,
