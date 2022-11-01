@@ -4,9 +4,7 @@ const config = require('../../config/config.json');
 const postdetails = async (req, res) => {
     const buyerdetails = {
             name: req.body.name,
-            email: req.body.email,
             mobilenumber: req.body.mobilenumber,
-            aadhaarnumber: req.body.aadhaar,
             address: req.body.address
 
         }
