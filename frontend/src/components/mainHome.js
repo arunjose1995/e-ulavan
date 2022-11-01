@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { TextField } from "@mui/material";
 
-function Home() {
+function Home1() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -102,4 +102,4 @@ const alerterror =()=>{
   );
 }
 
-export default Home;
+export default Home1;

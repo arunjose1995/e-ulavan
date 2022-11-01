@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Registration.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import axios from 'axios'
 
 import {
   AppBar,
@@ -54,9 +54,10 @@ const Registration = () => {
 
     onSubmit: (values) => {
       if (values.password === values.confirmpassword) {
-        alert(JSON.stringify(values, null, 2));
+        let post = {name:values.username,email:values.email,password:values.password}
+        axios.post('http://localhost:3001/post',post).then(res=>console.log(res))
         navigate("/Home")
-        console.log(values);
+        console.log(post);
       } else {
         setconfirmpassword(true);
       }
