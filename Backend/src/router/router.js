@@ -31,7 +31,7 @@ router.delete('manufacture/api/details/data', manufacturedetails.removedetails);
 
 //productdetails
 router.post('product/postdetails/post', productdetails.postdetails);
-router.get('product/api/details', productdetails.getAlldetails);
+router.get('/product/api/details', productdetails.getAlldetails);
 router.get('product/api/details/:id', productdetails.getdetails);
 router.put('product/api/details/data', productdetails.updateAlldetails);
 router.put('product/api/details/data/:id', productdetails.updatedetails);

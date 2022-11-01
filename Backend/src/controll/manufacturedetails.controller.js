@@ -8,7 +8,7 @@ const postdetails = async (req, res) => {
     bio: req.body.bio
   };
   console.log(req.body);
-  let user = await User.findOne({ mobilenumber: req.body.mobilenumber });
+  let user = await User.findOne({ mobilenumber:manufacturedetails.mobilenumber});
   console.log("fcrfc",user);
   if (user) {
    return  res.status(400).send('manufacture already register');

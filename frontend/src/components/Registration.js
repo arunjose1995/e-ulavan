@@ -55,7 +55,7 @@ const Registration = () => {
     onSubmit: (values) => {
       if (values.password === values.confirmpassword) {
         alert(JSON.stringify(values, null, 2));
-        navigate("/Home")
+        navigate("/HomeCard")
         console.log(values);
       } else {
         setconfirmpassword(true);
