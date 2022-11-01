@@ -22,21 +22,21 @@ router.post('/buyer/post',buyerdetails.postdetails);
 
 //manufacture
 router.post('/manufacture/post', manufacturedetails.postdetails);
-router.get('/api/details', manufacturedetails.getAlldetails);
-router.get('/api/details/:id', manufacturedetails.getdetails);
-router.put('/api/details/data', manufacturedetails.updateAlldetails);
-router.put('/api/details/data/:id', manufacturedetails.updatedetails);
-router.delete('/api/details/data/:id', manufacturedetails.removeAlldetails);
-router.delete('/api/details/data', manufacturedetails.removedetails);
+router.get('manufacture/api/details', manufacturedetails.getAlldetails);
+router.get('manufacture/api/details/:id', manufacturedetails.getdetails);
+router.put('manufacture/api/details/data', manufacturedetails.updateAlldetails);
+router.put('manufacture/api/details/data/:id', manufacturedetails.updatedetails);
+router.delete('manufacture/api/details/data/:id', manufacturedetails.removeAlldetails);
+router.delete('manufacture/api/details/data', manufacturedetails.removedetails);
 
 //productdetails
-router.post('/postdetails/post', productdetails.postdetails);
-router.get('/api/details', productdetails.getAlldetails);
-router.get('/api/details/:id', productdetails.getdetails);
-router.put('/api/details/data', productdetails.updateAlldetails);
-router.put('/api/details/data/:id', productdetails.updatedetails);
-router.delete('/api/details/data/:id', productdetails.removeAlldetails);
-router.delete('/api/details/data', productdetails.removedetails);
+router.post('product/postdetails/post', productdetails.postdetails);
+router.get('product/api/details', productdetails.getAlldetails);
+router.get('product/api/details/:id', productdetails.getdetails);
+router.put('product/api/details/data', productdetails.updateAlldetails);
+router.put('product/api/details/data/:id', productdetails.updatedetails);
+router.delete('product/api/details/data/:id', productdetails.removeAlldetails);
+router.delete('product/api/details/data', productdetails.removedetails);
 
 
 module.exports = router;
