@@ -1,6 +1,6 @@
 {
   "PORT": 5000,
-  "URL": "mongodb://localhost/E_ulavan",
+  "URL": "mongodb+srv://raguld7:ragulragul@cluster0.3huimir.mongodb.net/test",
   "JWTSECREATEKEY": "reshma_rohith"
 }
 
