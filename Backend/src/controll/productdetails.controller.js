@@ -1,18 +1,16 @@
 const User = require('../model/productdetails.model');
 const config = require('../../config/config.json');
 const postdetails = async (req, res) => {
+  console.log(req.files);
+
   const productdetails = {
-    image: req.body.image,
+    image: req.files.image,
     productname: req.body.productname,
     productdetails: req.body.productdetails,
     productquantity:req.body.productquantity
   };
-  console.log(req.body);
+  console.log(req.file);
   let user = await User.findOne({ productname: req.body.productname});
-  console.log("fcrfc",user);
-  if (user) {
-   return  res.status(400).send('productdetails already register');
-  }
   const result = await User.create(productdetails);
   res.send({ result })
 

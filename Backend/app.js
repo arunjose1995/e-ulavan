@@ -1,13 +1,17 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const fileuplaod = require('express-fileupload')
 const config = require("./config/config.json");
 const router = require("./src/router/router");
 const logger = require("./logger");
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+  
 
 
 const app = express();
 app.use(express.json());
+app.use(fileuplaod())
 app.use(cors({ origin: '*'}));
 app.use(router);
 mongoose
