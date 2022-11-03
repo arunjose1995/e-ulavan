@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Grid, Button } from "@mui/material";
-import { Card, CardContent, CardActionArea, Typography } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 
 import { Modal, Form } from "react-bootstrap";
-
+import {Container} from "react-bootstrap";
 import axios from "axios";
-import Home from "@mui/icons-material/Home";
+import {Row }from "react-bootstrap";
+import { Card,Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const HomeCard = () => {
@@ -97,59 +96,35 @@ const buyerdetails =()=>{
     <>
       {/* this card for coose role */}
       {showCard === false && (
-        <Grid
-          container
-          style={{
-            marginTop: "100px",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Grid item md={6}>
-            <Card style={{ backgroundColor: "#1DD455" }}>
-              <CardActionArea>
-                <CardContent>
-                  <Typography
-                    variant="h5"
-                    component={"h5"}
-                    style={{ textAlign: "center", color: "#FFFFFF" }}
-                  >
-                    CHOOSE YOUR ROLE
-                  </Typography>
-                  <Button
-                    onClick={handleShow}
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<AccountCircleIcon />}
-                    sx={{
-                      display: "inline-block",
-                      width: "70%",
-                      marginLeft: "80px",
-                      marginTop: "40px",
-                    }}
-                  >
-                    MANUFACTURER
-                  </Button>
-                  <Button
+               
+<Container style={{ marginTop: "100px" }}>
+          <Row style={{ justifyContent: "center", alignItems: "center" }}>
+            <Card style={{ width: "600px" }}>
+              <Card.Body>
+                <h2 style={{ textAlign: "center" }}>CHOOSE YOUR ROLE</h2>
+                <Button
+                  onClick={handleShow}
+                  variant="primary"
+                  style={{ display: "block", width: "100%", marginTop: "30px" }}
+                >
+                  MANUFACTURER
+                </Button>
+                <Button
                   onClick={handleShow1}
-                    variant="contained"
-                    color="secondary"
-                    startIcon={<AccountCircleIcon />}
-                    sx={{
-                      display: "inline-block",
-                      width: "70%",
-                      marginLeft: "80px",
-                      marginTop: "40px",
-                      marginBottom: "40px",
-                    }}
-                  >
-                    BUYER
-                  </Button>
-                </CardContent>
-              </CardActionArea>
+                  variant="primary"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    marginTop: "30px",
+                    marginBottom: "30px",
+                  }}
+                >
+                  BUYER
+                </Button>
+              </Card.Body>
             </Card>
-          </Grid>
-        </Grid>
+          </Row>
+        </Container>
       )}
       {/* this is manufacturer details */}
       <Modal

@@ -1,5 +1,5 @@
 import React from "react";
-
+import "/home/bhararathram/e-ulavan/frontend/src/components/Home.css"
 import { useState, useEffect } from "react";
 import HomeCard from "./HomeCard";
 import axios from "axios";
@@ -66,6 +66,7 @@ const Home = () => {
       console.log(posts);
       setTest(true)
      setShow(false)
+     setImage(null)
     } else {
       setAlert(true);
     }
@@ -93,10 +94,10 @@ const Home = () => {
     <>
     <Navbar bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">E-ULAVAN</Navbar.Brand>
+        <Navbar.Brand href="#home"><i class="fa-brands fa-pagelines"></i><b><i>E-ULAVAN</i></b></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end" >
-          <Button style={{marginRight:"90px"}}   onClick={handleShow}><i class="fa-solid fa-camera"></i>  POST</Button >
+          <Button style={{marginRight:"90px"}}   onClick={handleShow}><i class="fa-solid fa-paper-plane"></i> POST</Button >
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -104,17 +105,27 @@ const Home = () => {
       {postData.length > 0 &&
         postData.map((data) => {
           return (
-            <Card style={{ width: "18rem", float: "left", margin: "10px" }}>
-              <Card.Title><span>Product Name :</span>{data.productname}</Card.Title>
-              <Card.Img variant="top" src={data.image} size="md" />
+            <Card className="cards" style={{ width: "18rem", float: "left", margin: "10px" }}>
+              <Card.Title><b style={{color:"green"}}>Product Name:</b>{data.productname}</Card.Title>
+              <Card.Img variant="top" src={data.image} size="sm" />
               <Card.Body>
                 
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                 <b style={{color:"green"}}>details:</b> 
+                {data.productdetails}
+                
                 </Card.Text>
-                <Button variant="primary"  size="sm" ><i class="fa-solid fa-cart-shopping"></i> ADD TO CART</Button>
-                <Button variant="primary"  size="sm" className="justify-content-end">ORDER</Button>
+                <Card.Text><b style={{color:"green"}}> Available:</b>           
+                {data.productquantity} -kg.
+                
+                </Card.Text>
+                <Card.Text >
+                  RS PER KG 
+                </Card.Text>
+
+
+                <Button variant="success"  size="sm" ><i class="fa-solid fa-cart-shopping"></i> ADD TO CART</Button>
+                <Button variant="white" style={{borderColor:"black",marginLeft:"40px"}} size="sm" className="justify-content-end"> <i class="fa-solid fa-handshake"></i> ORDER</Button>
               </Card.Body>
             </Card>
           );
