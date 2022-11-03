@@ -19,7 +19,6 @@ const postdetails = async (req, res) => {
   const result = await User.create(userDetails);
   console.log(result);
   const token = jwt.sign({  user }, config.JWTSECREATEKEY);
-  req.header;
 
   // res.header('x-auth-token',token).send(result)
   res.send({user:result,token:token});
@@ -27,7 +26,7 @@ const postdetails = async (req, res) => {
 const login = async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   console.log(user);
-  if (!user) return res.status(400).send('password incorrect');
+  if (!user) return res.status(401).send('password incorrect');
   var passwordIsValid = bcrypt.compareSync(
     req.body.password,
     user.password
@@ -40,8 +39,13 @@ const login = async (req, res) => {
     });
   }
   else {
+    var token = req.header['x-access-token']
+    var token = jwt.sign({ id: user.id }, config.JWTSECREATEKEY, {
+      expiresIn: 864000
+    });
     return res.status(200).send({
-     message:"login sucessfully" 
+      message: "login sucessfully",
+      token:token
     })
 }
 };

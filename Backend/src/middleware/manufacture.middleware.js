@@ -16,3 +16,5 @@ const User = async (req, res, next) => {
   }
 };
 module.exports = { User };
+//Joi is a validation library that allows you to build schemas to validate
+//schema define structure
