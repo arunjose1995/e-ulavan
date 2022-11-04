@@ -31,10 +31,7 @@ export const BuyerHome = () => {
     setTarget1(event.target);
   };
 
-  const addToCart =(index)=>{
-    console.log(postData[index])
-
-  }
+ 
  
 
   const handleClickOrder = (event) => {
@@ -58,6 +55,13 @@ export const BuyerHome = () => {
         console.log(err);
       });
   }, [test]);
+
+  const addToCart =(index)=>{
+    const url="http://localhost:5000/product/addtocart"
+    console.log(postData[index])
+    axios.post()
+
+  }
 
   return (
     <>
