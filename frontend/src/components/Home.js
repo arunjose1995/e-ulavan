@@ -1,7 +1,7 @@
 import React from "react";
 import "/home/bhararathram/e-ulavan/frontend/src/components/Home.css"
 import { useState, useEffect } from "react";
-import HomeCard from "./HomeCard";
+
 import axios from "axios";
 import {
   Modal,
@@ -13,7 +13,7 @@ import {
   Navbar,
   Container,
   Col,
-  Row,ThemeProvider
+  Row,ThemeProvider,Popover,Overlay
 } from "react-bootstrap";
 import { json } from "react-router-dom";
 
@@ -29,6 +29,7 @@ const Home = () => {
   // post product details//
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
+  const[productMrpPerKg,setProductMrpPerKg] =useState("");
   const [productDetails, setproductDetails] = useState("");
   const [image, setImage] = useState(null);
 
@@ -37,6 +38,13 @@ const Home = () => {
   const [postData, setPostData] = useState([]);
 
   const [test,setTest]=useState(false)
+
+  const [show3, setShow3] = useState(false);
+  const [target, setTarget] = useState(null);
+
+  const [show4, setShow4] = useState(false);
+  const [target1, setTarget1] = useState(null);
+
 
   const onImageChange = (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
@@ -48,7 +56,8 @@ const Home = () => {
       productName !== "" &&
       productQuantity !== "" &&
       productDetails !== "" &&
-      image !== ""
+      image !== "" &&
+      productMrpPerKg !== ""
     ) {
       const postp = {
         productname: productName,
@@ -64,9 +73,10 @@ const Home = () => {
 
       setposts(postp);
       console.log(posts);
-      setTest(true)
+      
      setShow(false)
      setImage(null)
+     setTest(true)
     } else {
       setAlert(true);
     }
@@ -90,6 +100,25 @@ const Home = () => {
       });
   }, [test]);
 
+ 
+  const addToCart =(index)=>{
+    console.log(postData[index])
+
+  }
+ 
+
+  const handleClickOrder = (event) => {
+    setShow3(!show3);
+    setTarget(event.target);
+  };
+
+
+  const handleClickMyCart = (event) => {
+    setShow4(!show4);
+    setTarget1(event.target);
+  };
+
+
   return (
     <>
     <Navbar bg="primary" variant="dark">
@@ -97,17 +126,39 @@ const Home = () => {
         <Navbar.Brand href="#home"><i class="fa-brands fa-pagelines"></i><b><i>E-ULAVAN</i></b></Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end" >
+          
           <Button style={{marginRight:"90px"}}   onClick={handleShow}><i class="fa-solid fa-paper-plane"></i> POST</Button >
+          <Button onClick={handleClickMyCart} >My Cart <i class="fa-solid fa-bag-shopping"></i></Button>
         </Navbar.Collapse>
+
       </Container>
     </Navbar>
 
+{/* my cart overlay */}
+    <Overlay
+        show={show4}
+        target={target1}
+        placement="bottom"
+        
+        containerPadding={50}
+      >
+        <Popover id="popover-contained">
+          <Popover.Header as="h3">My Cart</Popover.Header>
+          <Popover.Body>
+            
+        
+          </Popover.Body>
+        </Popover>
+      </Overlay>
+           
+
       {postData.length > 0 &&
-        postData.map((data) => {
+        postData.map((data,index) => {
           return (
             <Card className="cards" style={{ width: "18rem", float: "left", margin: "10px" }}>
+               <Card.Img variant="top" src={data.image} size="sm" />
               <Card.Title><b style={{color:"green"}}>Product Name:</b>{data.productname}</Card.Title>
-              <Card.Img variant="top" src={data.image} size="sm" />
+             
               <Card.Body>
                 
                 <Card.Text>
@@ -123,13 +174,35 @@ const Home = () => {
                   RS PER KG 
                 </Card.Text>
 
+                <Card.Text >
+                <i class="fa-solid fa-truck-fast"></i> expected delevery within 2days
+                </Card.Text>
 
-                <Button variant="success"  size="sm" ><i class="fa-solid fa-cart-shopping"></i> ADD TO CART</Button>
-                <Button variant="white" style={{borderColor:"black",marginLeft:"40px"}} size="sm" className="justify-content-end"> <i class="fa-solid fa-handshake"></i> ORDER</Button>
+                <Button variant="success"  onClick={()=>{addToCart(index)}} size="sm" ><i class="fa-solid fa-cart-shopping"></i> ADD TO CART</Button>
+                <Button variant="white" onClick={handleClickOrder} style={{borderColor:"black",marginLeft:"40px"}} size="sm" className="justify-content-end"> <i class="fa-solid fa-handshake"></i> ORDER</Button>
               </Card.Body>
+              <Overlay
+        show={show3}
+        target={target}
+        placement="top"
+        
+        containerPadding={50}
+      >
+        <Popover id="popover-contained">
+          <Popover.Header as="h3">Confirm Order</Popover.Header>
+          <Popover.Body>
+            
+          <Form.Control placeholder="" type="number"/>KG
+          <Button size="sm" style={{marginLeft:"160px"}}>ORDER</Button>
+          </Popover.Body>
+        </Popover>
+      </Overlay>
             </Card>
           );
         })}
+
+
+
 
       {/* this is for post products */}
 
@@ -167,9 +240,9 @@ const Home = () => {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              name
+              Name
               <Form.Control
-                placeholder="Enter Your Name...."
+                placeholder="Enter Your Name"
                 style={{ maxWidth: "300px" }}
                 onChange={(e) => setProductName(e.target.value)}
               />
@@ -179,12 +252,25 @@ const Home = () => {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              product Quantity
+              Product Quantity
               <Form.Control
-                placeholder="Quantity in Numbers...."
+                placeholder="Quantity in Numbers"
                 type="number"
                 style={{ maxWidth: "300px" }}
                 onChange={(e) => setProductQuantity(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+             Mrp per 1/kg
+              <Form.Control
+                placeholder="Mrp per 1/kg"
+                type="number"
+                style={{ maxWidth: "300px" }}
+                onChange={(e) => setProductMrpPerKg(e.target.value)}
               />
             </Form.Group>
 
