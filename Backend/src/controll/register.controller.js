@@ -17,8 +17,7 @@ const postdetails = async (req, res) => {
   }
   const result = await User.create( userDetails );
   console.log(result);
-  const token = jwt.sign({ result }, config.JWTSECREATEKEY, { expiresIn: 864000 });
-  console.log(token);
+  
 
   // res.header('x-auth-token',token).send(result)
   res.send({user:result,token:token});
@@ -41,10 +40,10 @@ const login = async (req, res) => {
     });
   }
   else {
-    //var token = req.header['x-access-token']
-    // var token = jwt.sign({ id: user.id }, config., {
-    //   expiresIn: 864000
-    // });
+    var token = req.header['x-access-token']
+    var token = jwt.sign({ id: user.id }, config.secretkey, {
+      expiresIn: 864000
+    });
     return res.status(200).send({
       message: "login sucessfully",
      // token:token

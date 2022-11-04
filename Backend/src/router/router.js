@@ -21,7 +21,7 @@ router.delete('/api/details/data/:id', registrationController.removeAlldetails);
 router.delete('/api/details/data', registrationController.removedetails);
 
 //login
-router.post('/login',tokenmiddleware.authentication,registrationController.login)
+router.post('/login',registrationController.login)
 
 
 //buyer
