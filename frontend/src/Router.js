@@ -8,6 +8,11 @@ import NewRegistrationForm from "./components/NewRegistrationForm";
 import Login from "./components/Login";
 import Registration1 from "./components/Registration1";
 
+// import HomeCard from "./components/HomeCard";
+// import Home from './components/Home'
+// import Login from "./components/Login";
+// import NewRegistrationForm from "./components/NewRegistrationForm";
+// import Registration1 from "./components/Registration1";
 const Routering = () => {
   return (
     <div>

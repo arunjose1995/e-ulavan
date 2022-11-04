@@ -1,18 +1,16 @@
 const User = require('../model/productdetails.model');
 const config = require('../../config/config.json');
 const postdetails = async (req, res) => {
+
   const productdetails = {
     image: req.body.image,
     productname: req.body.productname,
     productdetails: req.body.productdetails,
-    productquantity:req.body.productquantity
+    productquantity: req.body.productquantity,
+    perkg:req.body.perkg
   };
-  console.log(req.body);
+  console.log(productdetails);
   let user = await User.findOne({ productname: req.body.productname});
-  console.log("fcrfc",user);
-  if (user) {
-   return  res.status(400).send('productdetails already register');
-  }
   const result = await User.create(productdetails);
   res.send({ result })
 
@@ -35,10 +33,11 @@ const getAlldetails =async(req,res) => {
   const  updateAlldetails=async(req,res)=>{
       const result = await User.updateMany({
           $set: {
-            image: req.body.image,
-            productname: req.body.productname,
-            productdetails: req.body.productdetails,
-            productquantity:req.body.productquantity
+          image: req.body.image,
+          productname: req.body.productname,
+          productdetails: req.body.productdetails,
+          productquantity: req.body.productquantity,
+          asperkg:req.body.asperkg
           }
       });
       console.log(result);
@@ -49,15 +48,18 @@ const getAlldetails =async(req,res) => {
       const result = await User.updateOne({_id:req.params.id},
           {
           $set:{
-    image: req.body.image,
-    productname: req.body.productname,
-    productdetails: req.body.productdetails,
-    productquantity:req.body.productquantity
+              image: req.body.image,
+            productname: req.body.productname,
+            productdetails: req.body.productdetails,
+              productquantity: req.body.productquantity,
+              asperkg:req.body.asperkg
           }
       });
       console.log(result);
       res.send(result);
-  };
+     };
+  
+  
   
   const removedetails=async(req,res)=>{
       const result = await User.deleteOne(req.params.id)
@@ -77,6 +79,8 @@ const getAlldetails =async(req,res) => {
     updateAlldetails,
     updatedetails,
     removedetails,
-    removeAlldetails
+    removeAlldetails,
+    
   };
+   
    

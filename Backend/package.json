@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write .",
-    "lint": "eslint . --ext js,jsx,ts,tsx --fix"
+    "lint": "eslint . --ext js,jsx,ts,tsx --fix",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,12 +17,14 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
     "install": "^0.13.0",
     "joi": "^17.6.3",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.10.0",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.8.0",
     "nodemon": "^2.0.20",
     "rotating-file-stream": "^3.0.4"
   },
