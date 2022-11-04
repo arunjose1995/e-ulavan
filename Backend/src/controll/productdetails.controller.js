@@ -59,21 +59,7 @@ const getAlldetails =async(req,res) => {
       res.send(result);
      };
   
-     const addtocart = async(req,res)=>{
-      const result = await User.updateOne({_id:req.params.id},
-          {
-          $set:{
-            image: req.body.image,
-            productId:req.body.productId,
-            productname: req.body.productname,
-            productdetails: req.body.productdetails,
-            productquantity: req.body.productquantity,
-            asperkg:req.body.asperkg
-          }
-      });
-      console.log(result);
-      res.send(result);
-  };
+  
   
   const removedetails=async(req,res)=>{
       const result = await User.deleteOne(req.params.id)
@@ -94,7 +80,7 @@ const getAlldetails =async(req,res) => {
     updatedetails,
     removedetails,
     removeAlldetails,
-    addtocart
+    
   };
    
    

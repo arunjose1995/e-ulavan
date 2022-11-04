@@ -6,6 +6,7 @@ const manufacturedetails = require('../controll/manufacturedetails.controller');
 const middleware = require('../middleware/registration.middleware');
 const productdetails = require('../controll/productdetails.controller');
 const mailnotification = require('../controll/nodemailer.controller');
+const cartController = require('../controll/addtocart.controller');
 
 const router = express.Router();
 
@@ -39,7 +40,6 @@ router.delete('/manufacture/api/details/data', manufacturedetails.removedetails)
 router.post('/product/postdetails/post', productdetails.postdetails);
 router.get('/product/api/details', productdetails.getAlldetails);
 router.get('/product/api/details/:id', productdetails.getdetails);
-router.put('/product/addtocart',tokenmiddleware.authentication, productdetails.addtocart);
 router.put('/product/api/details/data', productdetails.updateAlldetails);
 router.put('/product/api/details/data/:id', productdetails.updatedetails);
 router.delete('/product/api/details/data/:id', productdetails.removeAlldetails);
@@ -47,6 +47,14 @@ router.delete('/product/api/details/data', productdetails.removedetails);
 
 //notification
 router.post('/emailnotification', mailnotification.mailNotify);
+
+//addtocart
+router.post('/addtocart/post',cartController.postdetails)
+router.get('/addtocart/api/details', cartController.getAlldetails);
+router.post('/addtocart/api/singleUser/details', cartController.getdetails);
+router.delete('/addtocart/api/details/data/:id', cartController.removeAlldetails);
+router.delete('/addtocart/api/details/data', cartController.removedetails);
+
 
 
 module.exports = router;

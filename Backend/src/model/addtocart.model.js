@@ -1,7 +1,12 @@
+
+const { string } = require('joi');
 const mongoose = require('mongoose')
-const product_Details = new mongoose.Schema({
+const addtocart_Details = new mongoose.Schema({
     productname: {
         type: String,
+    },
+    productId: {
+        type:String,
     },
     
     productquantity: {
@@ -19,4 +24,4 @@ const product_Details = new mongoose.Schema({
     }
 
 })
-module.exports = mongoose.model('productdetails', product_Details);
+module.exports = mongoose.model('addtocartdetails', addtocart_Details);
