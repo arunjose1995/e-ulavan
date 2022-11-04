@@ -1,7 +1,7 @@
 
 const User = require('../model/registration.model');
 const jwt = require('jsonwebtoken');
-const config = require('../../config/config.json');
+const config = require('../../config/config');
 const bcrypt = require('bcrypt');
 // const express=require('express')
 const postdetails = async (req, res) => {

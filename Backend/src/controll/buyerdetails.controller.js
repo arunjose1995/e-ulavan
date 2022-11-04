@@ -1,5 +1,5 @@
 const Buyer = require('../model/buyerdetails.model');
-const config = require('../../config/config.json');
+const config = require('../../config/config');
 
 const postdetails = async (req, res) => {
     const buyerdetails = {
