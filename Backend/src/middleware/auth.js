@@ -1,14 +1,16 @@
 const jwt = require("jsonwebtoken");
 const config = require("../../config/config.json");
 
-const auth = async (req, res, next) => {
-  const token = req.header("x-auth-token");
-  if (!token) return res.status(401).send("access denied.No token process");
+const authentication = async (req, res, next) => {
   try {
-    const decoded = jwt.verify(token, config.JWTSCREAREKEY);
+   // const token = ;
+    const decoded = jwt.verify(req.headers["token"], config.JWTSECREATEKEY);
+    console.log(decoded);
     req.user = decoded;
     next();
   } catch (err) {
     res.status(404).send("Invalid TOKEN");
   }
 };
+
+module.exports={authentication}

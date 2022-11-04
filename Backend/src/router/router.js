@@ -1,5 +1,6 @@
 const express = require('express');
 const registrationController = require('../controll/register.controller');
+const tokenmiddleware = require('../middleware/auth');
 const buyerdetails = require('../controll/buyerdetails.controller');
 const manufacturedetails = require('../controll/manufacturedetails.controller');
 const middleware = require('../middleware/registration.middleware');
@@ -19,7 +20,8 @@ router.delete('/api/details/data/:id', registrationController.removeAlldetails);
 router.delete('/api/details/data', registrationController.removedetails);
 
 //login
-router.post('/login',registrationController.login)
+router.post('/login',tokenmiddleware.authentication,registrationController.login)
+
 
 //buyer
 router.post('/buyer/post',buyerdetails.postdetails);
@@ -37,6 +39,7 @@ router.delete('/manufacture/api/details/data', manufacturedetails.removedetails)
 router.post('/product/postdetails/post', productdetails.postdetails);
 router.get('/product/api/details', productdetails.getAlldetails);
 router.get('/product/api/details/:id', productdetails.getdetails);
+router.put('/product/addtocart',tokenmiddleware.authentication, productdetails.addtocart);
 router.put('/product/api/details/data', productdetails.updateAlldetails);
 router.put('/product/api/details/data/:id', productdetails.updatedetails);
 router.delete('/product/api/details/data/:id', productdetails.removeAlldetails);
