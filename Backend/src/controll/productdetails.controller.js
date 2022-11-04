@@ -1,5 +1,5 @@
 const User = require('../model/productdetails.model');
-const config = require('../../config/config.json');
+const config = require('../../config/config');
 const postdetails = async (req, res) => {
 
   const productdetails = {

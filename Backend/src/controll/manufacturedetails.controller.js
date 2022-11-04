@@ -1,5 +1,5 @@
 const User = require('../model/manufacturedetails.model');
-const config = require('../../config/config.json');
+const config = require('../../config/config');
 const postdetails = async (req, res) => {
   const manufacturedetails = {
     name: req.body.name,
