@@ -1,16 +1,15 @@
 const User = require('../model/productdetails.model');
 const config = require('../../config/config.json');
 const postdetails = async (req, res) => {
-  console.log(req.files);
 
   const productdetails = {
-    image: req.files.image,
+    image: req.body.image,
     productname: req.body.productname,
     productdetails: req.body.productdetails,
     productquantity: req.body.productquantity,
-    asperkg:req.body.asperkg
+    perkg:req.body.perkg
   };
-  console.log(req.file);
+  console.log(productdetails);
   let user = await User.findOne({ productname: req.body.productname});
   const result = await User.create(productdetails);
   res.send({ result })
@@ -34,9 +33,9 @@ const getAlldetails =async(req,res) => {
   const  updateAlldetails=async(req,res)=>{
       const result = await User.updateMany({
           $set: {
-            image: req.body.image,
-            productname: req.body.productname,
-            productdetails: req.body.productdetails,
+          image: req.body.image,
+          productname: req.body.productname,
+          productdetails: req.body.productdetails,
           productquantity: req.body.productquantity,
           asperkg:req.body.asperkg
           }
@@ -97,4 +96,5 @@ const getAlldetails =async(req,res) => {
     removeAlldetails,
     addtocart
   };
+   
    
