@@ -17,7 +17,9 @@ const product_Details = new mongoose.Schema({
     image: {
         type: String,
     },
-    
+    perkg: {
+        type:Number,
+    }
 
 })
 module.exports = mongoose.model('productdetails', product_Details);
