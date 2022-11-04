@@ -3,6 +3,10 @@ const product_Details = new mongoose.Schema({
     productname: {
         type: String,
     },
+    productId: {
+        type:String,
+    },
+    
     productquantity: {
         type: Number,
     },
@@ -13,5 +17,7 @@ const product_Details = new mongoose.Schema({
     image: {
         type: String,
     },
+    
+
 })
 module.exports = mongoose.model('productdetails', product_Details);

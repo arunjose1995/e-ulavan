@@ -7,7 +7,8 @@ const postdetails = async (req, res) => {
     image: req.files.image,
     productname: req.body.productname,
     productdetails: req.body.productdetails,
-    productquantity:req.body.productquantity
+    productquantity: req.body.productquantity,
+    asperkg:req.body.asperkg
   };
   console.log(req.file);
   let user = await User.findOne({ productname: req.body.productname});
@@ -36,7 +37,8 @@ const getAlldetails =async(req,res) => {
             image: req.body.image,
             productname: req.body.productname,
             productdetails: req.body.productdetails,
-            productquantity:req.body.productquantity
+          productquantity: req.body.productquantity,
+          asperkg:req.body.asperkg
           }
       });
       console.log(result);
@@ -47,10 +49,27 @@ const getAlldetails =async(req,res) => {
       const result = await User.updateOne({_id:req.params.id},
           {
           $set:{
-    image: req.body.image,
-    productname: req.body.productname,
-    productdetails: req.body.productdetails,
-    productquantity:req.body.productquantity
+              image: req.body.image,
+            productname: req.body.productname,
+            productdetails: req.body.productdetails,
+              productquantity: req.body.productquantity,
+              asperkg:req.body.asperkg
+          }
+      });
+      console.log(result);
+      res.send(result);
+     };
+  
+     const addtocart = async(req,res)=>{
+      const result = await User.updateOne({_id:req.params.id},
+          {
+          $set:{
+            image: req.body.image,
+            productId:req.body.productId,
+            productname: req.body.productname,
+            productdetails: req.body.productdetails,
+            productquantity: req.body.productquantity,
+            asperkg:req.body.asperkg
           }
       });
       console.log(result);
@@ -75,6 +94,7 @@ const getAlldetails =async(req,res) => {
     updateAlldetails,
     updatedetails,
     removedetails,
-    removeAlldetails
+    removeAlldetails,
+    addtocart
   };
    

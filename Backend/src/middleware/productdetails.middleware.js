@@ -6,7 +6,8 @@ const User = async (req, res, next) => {
         image: joi.string().required(),
         productname:joi.string().required(),
         productdetails: joi.string().required(),
-        productquantity:joi.number().required()
+      productquantity: joi.number().required(),
+      asperkg:joi.number().required()
     });
     await cards.validateAsync(req.body);
     next();
