@@ -48,7 +48,7 @@ const Registration1 = () => {
         .post("http://localhost:5000/post", post)
         .then((res) => {
           if(res.status===200){
-            Navigate("/Login")
+            Navigate("/HomeCard")
           }
         })
         .catch((res) => {

@@ -17,7 +17,7 @@ import {
 export const BuyerHome = () => {
   const [postData, setPostData] = useState([]);
 
-  const [test, setTest] = useState(false);
+  const [test, setTest] = useState();
 
   const [show4, setShow4] = useState(false);
   const [target1, setTarget1] = useState(null);
@@ -91,8 +91,9 @@ export const BuyerHome = () => {
 const url="http://localhost:5000/addtocart/post"
 
 axios.post(url,addcart).then((res)=>{
+
   console.log(res);
-  setTest(true);
+  setTest(res);
  
   
 
@@ -110,8 +111,7 @@ axios.post(url,addcart).then((res)=>{
       perkg : addToCart[index].perkg
     }
     axios.delete(url,delCart).then((res)=>{
-      console.log("delcart",res);
-      
+      console.log("delcart",res)
       setTest(true);
     })
 
