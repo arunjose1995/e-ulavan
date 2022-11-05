@@ -99,7 +99,8 @@ const buyerdetails =()=>{
                
 <Container style={{ marginTop: "100px" }}>
           <Row style={{ justifyContent: "center", alignItems: "center" }}>
-            <Card style={{ width: "600px" }}>
+            <Card style={{ width: "600px",backgroundColor:"lightgreen" }}>
+              
               <Card.Body>
                 <h2 style={{ textAlign: "center" }}>CHOOSE YOUR ROLE</h2>
                 <Button

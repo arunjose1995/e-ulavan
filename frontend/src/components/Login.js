@@ -50,7 +50,7 @@ const Login = () => {
         <Row style={{ alignItems: "center", justifyContent: "center" }}>
           <Form
             onSubmit={formik.handleSubmit}
-            style={{ width: "500px", backgroundColor: "white",borderRadius:'20px' }}
+            style={{ width: "500px", backgroundColor: "lightgreen",borderRadius:'20px' }}
           >
             <h1 style={{textAlign:'center'}}>Login</h1>
             <Form.Control

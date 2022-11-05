@@ -52,7 +52,13 @@ const Home = () => {
   const [target1, setTarget1] = useState(null);
 
 
-  const[addToCart,setaddToCart] = useState("");
+  const[addToCart,setaddToCart] = useState([]);
+
+  //==== my cart =====//
+  const [fullscreen, setFullscreen] = useState(true);
+  const [show5, setShow5] = useState(false);
+
+const[removeCart,setRemoveCart] = useState("");
 
   const onImageChange = (event) => {
     setImage(URL.createObjectURL(event.target.files[0]));
@@ -72,7 +78,7 @@ const Home = () => {
         productquantity: productQuantity,
         productdetails: productDetails,
         image: image,
-        asperkg:productMrpPerKg
+        perkg: productMrpPerKg
       };
       const url = "http://localhost:5000/product/postdetails/post";
 
@@ -81,11 +87,11 @@ const Home = () => {
       });
 
       setposts(postp);
-      console.log(posts);
-      
+      console.log("hiiii",posts);
+      setTest(true)
      setShow(false)
      setImage(null)
-     setTest(true)
+     setTest(false)
     } else {
       setAlert(true);
     }
@@ -107,19 +113,40 @@ const Home = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [test]);
+    },[postData]);
+
+
+useEffect(() => {
+
+
+  const url2 ="http://localhost:5000/addtocart/api/details"
+
+
+      axios.get(url2).then((res)=>{
+        console.log(res)
+        setaddToCart(res.data)
+        console.log(res.data)
+       
+        
+      })
+
+}, [addToCart,removeCart])
+
+
+     
+  
 
  
   const AddToCart =(index)=>{ 
     console.log(postData[index])
-    setaddToCart(postData[index])
+    
 
     const addcart ={
-      image:postData[index].image,
-      productname : postData[index].productname,
-      productdetails :postData[index].productdetails,
-      productquantity :postData[index].productquantity,
-      perkg : postData[index].asperkg
+      image:postData[index]?.image,
+      productname : postData[index]?.productname,
+      productdetails :postData[index]?.productdetails,
+      productquantity :postData[index]?.productquantity,
+      perkg : postData[index]?.perkg
     }
     console.log(addcart)
 
@@ -127,14 +154,13 @@ const url="http://localhost:5000/addtocart/post"
 
 axios.post(url,addcart).then((res)=>{
   console.log(res);
+  setTest(true);
+ 
+  
+
 })
 
-const url2 ="http://localhost:5000/addtocart/api/singleUser/details"
 
-
-axios.get(url2).then((res)=>{
-  console.log(res)
-})
 
 
   }
@@ -146,27 +172,51 @@ axios.get(url2).then((res)=>{
   };
 
 
-  const handleClickMyCart = (event) => {
-    setShow4(!show4);
-    setTarget1(event.target);
+  const handleClickMyCart = (breakpoint) => {
+    setFullscreen(breakpoint);
+    setShow5(true);
   };
+
+
+
+
+
+
+  const RemoveCart =(index)=>{
+
+    // console.log(id,"this isf")
+    const url= "http://localhost:5000/addtocart/api/details/data"
+
+    const delCart ={
+      image: addToCart[index]?.image,
+      productname : addToCart[index]?.productname,
+      productdetails :addToCart[index]?.productdetails,
+      productquantity :addToCart[index]?.productquantity,
+      perkg : addToCart[index]?.perkg
+    }
+    axios.delete(url,delCart).then((res)=>{
+      console.log("delcardbsajchjhavhjavhjvahjahjvajhv",res)
+     setRemoveCart(res)
+    })
+
+  }
 
 
   return (
     <>
-    <Navbar bg="success" variant="info"  >
+    <Navbar bg="success" variant="info" expand="lg" >
       <Container>
-        <Navbar.Brand  style={{fontSize:"60px",color:"white"}} ><i class="fa-brands fa-pagelines"></i><b><i>E-ULAVAN</i></b></Navbar.Brand>
+        <Navbar.Brand  style={{fontSize:"40px",color:"white"}} ><i class="fa-brands fa-pagelines"></i><b><i>E-ULAVAN</i></b></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end" >
        
-          <Button style={{marginRight:"90px"}}   onClick={handleShow}><i class="fa-solid fa-paper-plane"></i> POST</Button >
-          <Button onClick={handleClickMyCart} >My Cart <i class="fa-solid fa-bag-shopping"></i></Button>
+          <Button style={{marginRight:"90px"}} variant="outline-info"   onClick={handleShow}><i class="fa-solid fa-paper-plane"></i> POST</Button >
+          <Button onClick={handleClickMyCart}  variant="outline-info"  >My Cart <i class="fa-solid fa-bag-shopping"></i></Button>
           {/* <Button style={{marginLeft:"50px"}}><i class="fa-solid fa-arrow-right-from-bracket"></i></Button>  */}
-          <DropdownButton id="dropdown-basic-button" title="more">
-      <Dropdown.Item href="/buyerHome" >Switch Role</Dropdown.Item>
-      <Dropdown.Item href="/Login">Log Out</Dropdown.Item>
+          <DropdownButton  variant="outline-info"  id="dropdown-basic-button" title="more">
+      <Dropdown.Item href="/buyerHome" > <i class="fa-solid fa-user-group"></i>Switch Role</Dropdown.Item>
+      <Dropdown.Item href="/Login"><i class="fa-solid fa-right-from-bracket"></i>Log Out</Dropdown.Item>
      
     </DropdownButton>
         </Navbar.Collapse>
@@ -175,28 +225,19 @@ axios.get(url2).then((res)=>{
     </Navbar>
 
 {/* my cart overlay */}
-    <Overlay
-        show={show4}
-        target={target1}
-        placement="bottom"
-        
-        containerPadding={50}
-      >
-        <Popover id="popover-contained">
-          <Popover.Header as="h3">My Cart</Popover.Header>
-          <Popover.Body>
-            
-        
-          </Popover.Body>
-        </Popover>
-      </Overlay>
+   
+<Modal show={show5} fullscreen={fullscreen} style={{backgroundColor:"lightgreen"}} onHide={() => setShow5(false)}>
+        <Modal.Header closeButton style={{backgroundColor:"lightgreen"}}>
+          <Modal.Title style={{backgroundColor:"lightgreen"}}>my cart</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{backgroundColor:"lightgreen"}}>
+        { addToCart?.length > 0 && addToCart.map((data,index)=>{
            
-
-      {postData.length > 0 &&
-        postData.map((data,index) => {
-          return (
-            <Card className="cards" style={{ width: "18rem", float: "left", margin: "10px",backgroundColor:"lightgreen" }}>
-               <Card.Img variant="top" src={data.image} size="sm" />
+             return(
+              <>
+           
+          <Card style={{backgroundColor:"lightgreen"}}>
+          <Card.Img variant="top" src={data.image} size="sm" />
               <Card.Title><b style={{color:"green"}}>Product Name:</b>{data.productname}</Card.Title>
              
               <Card.Body>
@@ -211,7 +252,48 @@ axios.get(url2).then((res)=>{
                 
                 </Card.Text>
                 <Card.Text >
-                {data.asperkg}  RS PER KG 
+               PER KG  {data.perkg}  RS 
+                </Card.Text>
+
+                <Card.Text >
+                <i class="fa-solid fa-truck-fast"></i> expected delevery within 2days
+                </Card.Text>
+
+                <Button variant="success"  onClick={()=>{RemoveCart(data._id)}} size="sm" ><i class="fa-solid fa-trash"></i> REMOVE TO CART</Button>
+                <Button variant="white" onClick={handleClickOrder} style={{borderColor:"black",marginLeft:"40px"}} size="sm" className="justify-content-end"> <i class="fa-solid fa-handshake"></i> ORDER</Button>
+              </Card.Body>
+
+          </Card>
+           
+           
+           </>
+             )
+             
+           })}
+        </Modal.Body>
+      </Modal>   
+
+      {postData.length > 0 &&
+        postData.map((data,index) => {
+          return (
+            <Card className="cards"  style={{ width: "18rem", float: "left", margin: "15px",backgroundColor:"lightgreen", }}>
+               <Card.Img variant="top" src={data.image} size="sm" />
+              <Card.Title><b style={{color:"green"}}>Product Name:</b>{data.productname}</Card.Title>
+             
+              <Card.Body>
+                
+                <Card.Text >
+                 <b style={{color:"green"}}>details:</b> 
+               <span style={{fontSize:"10px"}}>{data.productdetails}</span> 
+                
+                </Card.Text>
+                <Card.Text><b style={{color:"green"}}> Available:</b>           
+                {data.productquantity} -kg.
+                
+                </Card.Text>
+                <Card.Text >
+                
+                <b style={{color:"green"}} >PER KG</b>   {data.perkg} /<b style={{color:"green"}} >RS</b>
                 </Card.Text>
 
                 <Card.Text >
@@ -221,6 +303,8 @@ axios.get(url2).then((res)=>{
                 <Button variant="success"  onClick={()=>{AddToCart(index)}} size="sm" ><i class="fa-solid fa-cart-shopping"></i> ADD TO CART</Button>
                 <Button variant="white" onClick={handleClickOrder} style={{borderColor:"black",marginLeft:"40px"}} size="sm" className="justify-content-end"> <i class="fa-solid fa-handshake"></i> ORDER</Button>
               </Card.Body>
+
+
               <Overlay
         show={show3}
         target={target}
@@ -347,3 +431,6 @@ axios.get(url2).then((res)=>{
 };
 
 export default Home;
+
+
+

@@ -72,7 +72,7 @@ const Registration1 = () => {
             onSubmit={formik.handleSubmit}
             style={{
               width: "500px",
-              backgroundColor: "white",
+              backgroundColor: "lightgreen",
               borderRadius: "20px",
             }}
           >
@@ -156,7 +156,7 @@ const Registration1 = () => {
               }}
             >
               <Button variant="success" type="submit">
-                Login
+                Register
               </Button>
             </div>
 
